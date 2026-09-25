@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize)]
 struct MinecraftVersion {
     id: String,
-    #[serde(rename = "type")] 
+    #[serde(rename = "type")]
     version_type: String,
     url: String,
 }
@@ -18,10 +18,10 @@ struct VersionManifest {
 #[tauri::command]
 async fn fetch_versions() -> Result<Vec<MinecraftVersion>, String> {
     let url = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
-    
+
     let response = reqwest::get(url).await.map_err(|e| e.to_string())?;
     let manifest: VersionManifest = response.json().await.map_err(|e| e.to_string())?;
-        
+
     Ok(manifest.versions)
 }
 
