@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tauri App</title>
+    <script type="module" src="/src/main.ts" defer></script>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="launcher-container">
+      
+      <nav class="sidebar">
+        <button class="nav-btn"><i class="fi fi-br-play"></i></button>
+        <button class="nav-btn"><i class="fi fi-br-apps"></i></button>
+        <button class="nav-btn"><i class="fi fi-br-settings"></i></button>
+        <button class="nav-btn theme-btn"><i class="fi fi-br-moon"></i></button>
+      </nav>
+
+      <main class="content">
+        <div class="hero">
+          <!-- A decorative soft glowing shape in the background -->
+          <div class="hero-blob"></div>
+          
+          <!-- Your main welcome message -->
+          <h1 class="welcome-text">Welcome back, Mika.</h1>
+          <p class="subtitle-text">Ready to jump into a new adventure?</p>
+        </div>
+  
+        <div class="action-bar">
+<div class="custom-select">
+  
+  <!-- The new Split Button layout -->
+  <div class="split-btn-group">
+    <button class="select-main-btn">
+      <span>My 1.20.4 Pack</span>
+    </button>
+    
+    <button class="select-trigger-btn">
+      <i class="fi fi-br-angle-small-down"></i>
+    </button>
+  </div>
+  
+  <!-- The popup menu stays exactly the same! -->
+  <div class="select-options">
+    <div class="option"><i class="fi fi-br-box"></i> My 1.20.4 Pack</div>
+    <div class="option"><i class="fi fi-br-cube"></i> Vanilla 1.8.9</div>
+    <div class="option"><i class="fi fi-br-hammer"></i> Fabric Mods</div>
+  </div>
+
+</div>
+  
+          <button class="play-btn">PLAY</button>
+        </div>
+      </main>
+
+    </div>
+  </body>
+</html>

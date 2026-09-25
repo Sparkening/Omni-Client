@@ -1,0 +1,238 @@
+body {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+}
+
+.launcher-container {
+  display: flex; 
+  height: 100vh; 
+  background-color: #000000; 
+}
+
+.sidebar {
+  width: 250px; 
+  background-color: #1C1C1E; 
+  display: flex; /* Turn on flexbox for the sidebar itself */
+  flex-direction: column; /* Stack items vertically */
+  padding: 20px; /* Adds space inside the edges */
+  gap: 10px; /* Adds space between each button */
+}
+
+/* Main content area start */
+.content {
+  flex: 1; 
+  background-color: #09090B; /* Our dark void fix! */
+  display: flex;
+  flex-direction: column; /* Stack the hero and action bar vertically */
+}
+
+.hero {
+  flex: 1; 
+  position: relative; /* Needed so the blob stays contained inside this area */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centers the text vertically */
+  padding: 60px; /* Gives the text some breathing room from the edges */
+  overflow: hidden; /* Stops the glowing blob from spilling over the UI */
+}
+
+/* The MD3 Expressive background glow */
+.hero-blob {
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  width: 70vw;
+  height: 70vw;
+  /* A soft, modern purple glow fading into the dark background */
+  background: radial-gradient(circle, rgba(147, 112, 219, 0.12) 0%, rgba(9, 9, 11, 0) 70%); 
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none; /* Ensures you can't accidentally click on it */
+}
+
+.welcome-text {
+  font-size: 56px;
+  color: #FFFFFF;
+  margin: 0 0 12px 0;
+  z-index: 1; /* Keeps text above the glow */
+  font-weight: 700;
+  letter-spacing: -1.5px; /* Tightens the font for that modern Apple/Google look */
+}
+
+.subtitle-text {
+  font-size: 20px;
+  color: #8E8E93;
+  margin: 0;
+  z-index: 1;
+  font-weight: 400;
+}
+
+/* Action bar styling start */
+.action-bar {
+  height: 80px; 
+  background-color: #1C1C1E; /* Matches the sidebar */
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle divider line */
+  display: flex;
+  align-items: center; /* Centers items vertically */
+  padding: 0 40px; /* Adds breathing room on the left and right */
+  gap: 20px; /* Space between the version selector and Play button */
+}
+
+.custom-select {
+  position: relative; /* Needed for the dropdown positioning */
+  display: inline-block; /* Allows the select box to size naturally */
+}
+
+.split-btn-group {
+  display: flex;
+  gap: 4px; /* The small gap between the two sides */
+}
+
+/* The left side (Text) */
+.select-main-btn {
+  background-color: #2C2C2E; 
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 24px; 
+  /* 32px on the left corners, 8px on the right corners */
+  border-radius: 32px 8px 8px 32px; 
+  font-size: 16px; 
+  cursor: pointer; 
+  flex: 1; /* Allows the text side to stretch */
+  text-align: left;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* The right side (Arrow) */
+.select-trigger-btn {
+  background-color: #2C2C2E; 
+  color: #FFFFFF;
+  border: none;
+  width: 48px; /* Fixed width to make morphing into a circle seamless */
+  /* 8px on the left corners, 32px on the right corners */
+  border-radius: 8px 32px 32px 8px; 
+  cursor: pointer; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.select-main-btn:hover, .select-trigger-btn:hover {
+  background-color: #3A3A3C; 
+}
+
+/* The MD3 Morphing Animation! */
+.custom-select.open .select-trigger-btn {
+  /* Snaps the left corners from 8px to 32px to create a perfect circle */
+  border-radius: 32px; 
+  background-color: #4A4A4C; /* Slight highlight when active */
+}
+
+/* Arrow rotation */
+.select-trigger-btn i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transform-origin: center center; /* Forces the spin on its own exact center */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-select.open .select-trigger-btn i {
+  transform: rotate(180deg);
+}
+
+.select-options {
+  visibility: hidden;
+  opacity: 0;         
+  transform: translateY(-10px);
+  transition: all 0.2s ease; 
+  color: #FFFFFF; 
+  position: absolute; 
+  bottom: calc(100% + 8px);
+  left: 0;
+  min-width: 100%;
+  overflow: hidden;
+  z-index: 10;
+  background-color: #2C2C2E; 
+  border-radius: 12px; 
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.custom-select.open .select-options {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.option {
+padding: 12px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 8px; 
+  transition: all 0.2s ease;
+  display: flex; 
+  align-items: center;
+  gap: 12px; 
+}
+
+.option:hover {
+  background-color: #3a3a3c;
+}
+
+.play-btn {
+  background-color: #00674b; 
+  border: none; 
+  color: #FFFFFF;
+  font-size: 20px;
+  padding: 16px 40px; 
+  
+  /* Top-Left, Top-Right, Bottom-Right, Bottom-Left */
+  /* Creates a shape with 3 round corners and 1 sharp corner */
+  border-radius: 32px 32px 8px 32px; 
+  
+  cursor: pointer; 
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* MD3 standard easing */
+}
+
+.play-btn:hover {
+  background-color: #004e39;
+  
+  border-radius: 8px 32px 32px 32px; 
+  transform: scale(1.02); 
+}
+/* Action bar styling end */
+
+/* Button styling start */
+.nav-btn {
+  background: transparent; /* Removes the default gray block */
+  border: none;            /* Removes the hard outline */
+  color: #8E8E93;          /* An iOS-style unselected gray */
+  font-size: 28px;         /* Makes the icons nice and big */
+  padding: 16px;           /* Gives the icon room to breathe */
+  border-radius: 16px;     /* Smooth, modern rounded corners */
+  cursor: pointer;         /* Changes the mouse to a hand pointer */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease; /* Prepares the button for smooth animations */
+  width: 60px; /* Ensures all buttons are the same width */
+  height: 60px; /* Ensures all buttons are the same height */
+}
+
+.nav-btn:hover {
+  background-color: rgba(0, 0, 0, 0.2); /* Creates a darker translucent block behind the icon */
+  color: #FFFFFF; /* Brightens the icon itself so it pops */
+  transform: scale(1.15); /* Grows the button by 15% */
+}
+
+.theme-btn {
+  margin-top: auto; 
+}
+/* Button styling end */
